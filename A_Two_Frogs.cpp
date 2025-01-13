@@ -15,9 +15,10 @@ int main(){
                     flag= true;
                 }
                 }
-                if(flag==true){
-                cout<<"YES"<<endl;
+                
             }
+            if(flag==true){
+                cout<<"YES"<<endl;
             }
             
         }
