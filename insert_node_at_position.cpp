@@ -36,16 +36,21 @@ void insert_at_position(Node* &head, int pos, int v){
     Node * tem1=head;
     Node *tem;
     if(pos==0){
-        newnode->next=tem1;
+        newnode->next=tem1;//insert ar head;
         head=newnode;
     }
    else{
     tem=head;
      for(int i=0; i<pos-1; i++){
         tem=tem->next;
+        if(tem->next==NULL){
+            cout<<"Invalid Index!"<<endl;
+            return;
+        }
     }
     newnode->next=tem->next;
     tem->next=newnode;
+    cout<<"inserted "<<v<<" at "<<pos<<" index!"<<endl;
    }
 
 }
@@ -76,7 +81,7 @@ int main(){
         cout<<"please enter value : ";
         cin>>v;
         insert_at_position(head,pos,v);
-        cout<<"inserted "<<v<<" at "<<pos<<" index!"<<endl;
+        
     }
     else if(op==4){
         break;
