@@ -9,30 +9,28 @@ class Node{
         this->next=NULL;
     }
 };
-void insert_head(Node* &head,Node*& tail, int val){
-    Node* newnode= new Node(val);
+void insert_at_head(Node* &head, Node* & tail,int v){
+    Node* newnode= new Node(v);
     if(head==NULL){
         head=newnode;
         tail=head;
+        return;
     }
-    else{
-        newnode->next=head;
-        head=newnode;
-    }
-}
-void insert_at_tail(Node* &head,Node* &tail,int val){
-    Node* newnode = new Node(val);
-    if(head==NULL){
-        head=newnode;
-        tail=head;
-    }
-    else{
-        tail->next=newnode;
-        tail=newnode;
-    }
-}
+    newnode->next=head;
+    head=newnode;
 
-void print_linked_list(Node* head){
+}
+void insert_at_tail(Node*& head, Node* &tail,int v){
+    Node* newnode=new Node(v);
+    if(head==NULL){
+        head=newnode;
+        tail=head;
+        return;
+    }
+    tail->next=newnode;
+    tail=newnode;
+}
+void print_linked_list(Node * head){
     Node* tem= head;
     while(tem!=NULL){
         cout<<tem->val<<" ";
@@ -40,56 +38,55 @@ void print_linked_list(Node* head){
     }
     cout<<endl;
 }
-int count_size(Node* head){
-    Node * tem=head;
-    int count=0;
-    while(tem!=NULL){
-        count++;
-        tem=tem->next;
+void delete_at_pos(Node*& head, Node*&tail,int pos){
+    Node* tem= head;
+
+    if(head==NULL){
+        return;
     }
-    return count;
-}
-void delete_node_at_position(Node* &head,Node*& tail,int val){
-    Node * tem=head;
-    if(val==0){
-       Node* delelenode=head;
-       head=tem->next;
-       delete delelenode;
+    else if(pos==0){
+        Node* deletenode= head;
+        head=head->next;
+        delete deletenode;
     }
+    
     else{
-        for(int i=1; i<val; i++){
-        tem=tem->next;
-        if(tem==NULL){
-            return;
+        for(int i=1; i<pos; i++){
+            tem=tem->next;
+            if(tem==NULL||tem->next==NULL){
+                return;
+            }
         }
-    }
-    Node* deletenode= tem->next;
-    tem->next=tem->next->next;
-    delete deletenode;
+        if(tem->next->next==NULL){
+            Node* deletenode= tem->next;
+            tail=tem;
+            delete deletenode;
+        }
+        Node* deletenode= tem->next;
+        tem->next=tem->next->next;
+        if(deletenode==tail){
+            tail=tem->next;
+        }
+        delete deletenode;
     }
 }
 int main(){
-   Node* head=NULL;
-   Node* tail=NULL;
-   int t,op,val;
-   cin>>t;
-   while(t--){
-    cin>>op>>val;
-    if(op==0){
-        insert_head(head,tail,val);
-    }
-    else if(op==1){
-        
-        insert_at_tail(head,tail,val);
-    }
-    else if(op==2){
-        if(val==count_size(head)-1){
-            print_linked_list(head);
+    Node* head= NULL;
+    Node* tail=NULL;
+    int t,op,v;
+    cin>>t;
+    while(t--){
+        cin>>op>>v;
+        if(op==0){
+            insert_at_head(head,tail,v);
         }
-        delete_node_at_position(head,tail,val);
+        else if(op==1){
+            insert_at_tail(head,tail,v);
+        }
+        else if(op==2){
+            delete_at_pos(head,tail,v);
+        }
+        print_linked_list(head);
     }
-    print_linked_list(head);
-   } 
-   
     return 0;
 }
