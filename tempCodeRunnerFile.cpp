@@ -1,1 +1,1 @@
-list1.clear();
+ // d->next=head;
