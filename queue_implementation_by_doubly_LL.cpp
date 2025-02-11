@@ -4,35 +4,42 @@ class Node{
     public:
     int val;
     Node* next;
+    Node* prev;
     Node(int val){
         this->val=val;
         this->next=NULL;
+        this->prev=NULL;
     }
 };
-class myqueue{
+class myQueue{
     public:
     Node* head=NULL;
-    Node*tail=NULL;
+    Node* tail=NULL;
     int cnt=0;
     void push(int val){
         cnt++;
-        Node* newnode= new Node(val);
+        Node* newnode=new Node(val);
         if(head==NULL){
             head=newnode;
             tail=head;
             return;
         }
         tail->next=newnode;
+        newnode->prev=tail;
         tail=newnode;
     }
     void pop(){
         cnt--;
         Node* deletenode= head;
         head=head->next;
-        delete deletenode;
         if(head==NULL){
             tail=NULL;
+            delete deletenode;
+            return;
         }
+        head->prev=NULL;
+        delete deletenode;
+        return ;
     }
     int front(){
         return head->val;
@@ -46,15 +53,16 @@ class myqueue{
     }
 };
 int main(){
-    myqueue qu;
-    qu.push(10);
-    qu.push(20);
-    qu.push(30);
-    cout<<qu.front()<<endl;
-    qu.pop();
-    cout<<qu.front()<<endl;
-    qu.pop();
-    if(!qu.empty()){
+    myQueue qu;
+    int n;
+    cin>>n;
+    while(n--){
+        int v;
+        cin>>v;
+        qu.push(v);
+    }
+    while(!qu.empty()){
+        
         cout<<qu.front()<<endl;
         qu.pop();
     }
