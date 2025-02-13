@@ -9,6 +9,7 @@ int main(){
         cin>>v;
         q.push(v);
     }
+    cout<<q.size()<<endl;
     while(!q.empty()){
         cout<<q.front()<<endl;
         q.pop();
