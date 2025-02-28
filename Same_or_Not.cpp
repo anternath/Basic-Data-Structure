@@ -16,8 +16,7 @@ int main(){
         q2.push(v);
     }
     bool check=true;
-    cout<<n<<endl<<k<<endl;
-    if(n==k){
+    if(st.size()==q2.size()){
         while(!st.empty()){
             if(st.top()!=q2.front()){
                 check=false;

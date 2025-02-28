@@ -39,6 +39,7 @@ class myStack{
         if(head!=NULL){
             return head->val;
         }
+        else return -1;
     }
     int size(){
         return cnt;
@@ -81,6 +82,7 @@ class myqueue{
         if(head!=NULL){
             return head->val;
         }
+        else return -1;
     }
     int size(){
         return cnt;
