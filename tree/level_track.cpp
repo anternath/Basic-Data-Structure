@@ -39,30 +39,26 @@ Node* input(){
     }
     return root;
 }
-int maxhight(Node* root){
-    if(root==NULL) return 0;
-    int l= maxhight(root->left);
-    int r= maxhight(root->right);
-    return max(l,r)+1;
-}
-void level_order(Node* root){
-    queue<Node*>q;
-    q.push(root);
+void level_tracking(Node* root,int search){
+    queue<pair<Node*,int>>q;
+    if(root){
+        q.push({root,1});
+    }
     while(!q.empty()){
-        Node* f= q.front();
+        pair<Node*,int> pr= q.front();
+        int level= pr.second;
+        Node* node= pr.first;
         q.pop();
-        //jabotiyo kaj
-        cout<<f->val<<" ";
+        if((node->val==search)) cout<<level;
 
-       if(f->left){
-        q.push(f->left);
-       }
-       if(f->right) q.push(f->right);
+        if(node->left) q.push({node->left,level+1});
+        if(node->right)q.push({node->right,level+1});
     }
 }
 int main(){
-    Node* root= input();
-    level_order(root);
-    cout<<maxhight(root);
+    Node* root = input();
+    int n;
+    cin>>n;
+    level_tracking(root,n);
     return 0;
 }

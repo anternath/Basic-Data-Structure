@@ -39,30 +39,19 @@ Node* input(){
     }
     return root;
 }
-int maxhight(Node* root){
+int count_leaf(Node* root){
     if(root==NULL) return 0;
-    int l= maxhight(root->left);
-    int r= maxhight(root->right);
-    return max(l,r)+1;
-}
-void level_order(Node* root){
-    queue<Node*>q;
-    q.push(root);
-    while(!q.empty()){
-        Node* f= q.front();
-        q.pop();
-        //jabotiyo kaj
-        cout<<f->val<<" ";
-
-       if(f->left){
-        q.push(f->left);
-       }
-       if(f->right) q.push(f->right);
+    if(root->left==NULL && root->right==NULL){
+        return 1;
+    }
+    else{
+        int l= count_leaf(root->left);
+    int r= count_leaf(root->right);
+    return l+r;
     }
 }
 int main(){
     Node* root= input();
-    level_order(root);
-    cout<<maxhight(root);
+    cout<<count_leaf(root);
     return 0;
 }
