@@ -39,31 +39,17 @@ Node* input(){
     }
     return root;
 }
-void left_view(Node* root){
-    vector<int>v;
-    queue<pair<Node*,int>>q;
-    if(root)q.push({root,1});
-    int frq[1000]={false};
-    while(!q.empty()){
-        pair<Node*,int> pr= q.front();
-        Node* node= pr.first;
-        int level= pr.second;
-        q.pop();
-
-        if(frq[level]==false){
-            v.push_back(node->val);
-            frq[level]=true;
-        }
-
-        if(node->left)q.push({node->left,level+1});
-        if(node->right)q.push({node->right,level+1});
-    }
-    for(int i=0; i<=v.size()-1; i++){
-        cout<<v[i]<<" ";
-    }
+int mx=0;
+int diameter(Node* root){
+    if(root==NULL) return 0;
+    int l= diameter(root->left);
+    int r= diameter(root->right);
+    mx= max(mx,l+r);
+    return max(l,r)+1;
 }
 int main(){
     Node* root = input();
-    left_view(root);
+    int h=diameter(root);
+    cout<<mx;
     return 0;
 }
