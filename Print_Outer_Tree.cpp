@@ -39,7 +39,7 @@ Node* input_level_order(){
     return root;
 }
 void left(Node* root){
-    if(root->left==NULL) return;
+    if(root==NULL) return;
     left(root->left);
     cout<<root->val<<" ";
 }
@@ -51,7 +51,7 @@ void right(Node* root){
 int main(){
     Node* root= input_level_order();
     left(root);
-    right(root);
+    right(root->right);
 
     return 0;
 }
