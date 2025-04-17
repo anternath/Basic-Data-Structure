@@ -7,7 +7,7 @@ int main(){
     while(n--){
         int v;
         cin>>v;
-        st.insert(v);
+        st.insert(v);//insert O(logN)
     }
     for(auto it=st.begin(); it!=st.end(); it++){
         cout<<*it<<" ";
